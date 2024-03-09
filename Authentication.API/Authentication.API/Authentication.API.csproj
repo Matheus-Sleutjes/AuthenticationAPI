@@ -25,8 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Authentication.Application\Authentication.Application.csproj" />
-    <ProjectReference Include="..\..\Authentication.Infrastructure\Authentication.Infrastructure.csproj" />
+    <Folder Include="Configuration\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Authentication.Application\Authentication.Application.csproj" />
   </ItemGroup>
 
 </Project>
