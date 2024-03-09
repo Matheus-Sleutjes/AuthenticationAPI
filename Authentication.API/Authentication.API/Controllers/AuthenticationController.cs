@@ -1,5 +1,6 @@
 using Authentication.Application.Contract;
 using Authentication.Domain.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Authentication.API.Controllers
@@ -15,6 +16,7 @@ namespace Authentication.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public IActionResult Get(Guid id)
         {
             var entity = _authenticationService.Find(id);
@@ -22,6 +24,7 @@ namespace Authentication.API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Post([FromBody]UserDto request)
         {
             _authenticationService.Add(request);
@@ -29,6 +32,7 @@ namespace Authentication.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Update([FromBody]UserDto request, Guid id) 
         {
             var entity = _authenticationService.Update(request, id);
@@ -36,10 +40,19 @@ namespace Authentication.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(Guid id)
         {
             _authenticationService.Delete(id);
             return Ok();
+        }
+
+        [HttpPost("Login")]
+        [AllowAnonymous]
+        public IActionResult Login([FromBody]UserDto request)
+        {
+            var token = _authenticationService.Login(request);
+            return Ok(token);
         }
     }
 }

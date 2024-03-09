@@ -8,5 +8,6 @@ namespace Authentication.Application.Contract
         void Add(UserDto user);
         UserDto Update(UserDto user, Guid id);
         void Delete(Guid id);
+        string Login(UserDto request);
     }
 }

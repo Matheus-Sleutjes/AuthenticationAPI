@@ -18,6 +18,11 @@ namespace Authentication.Infrastructure.Repository
             return _context.Users.AsNoTracking().Where(e => e.Id == id).SingleOrDefault();
         }
 
+        public User Find(string username)
+        {
+            return _context.Users.AsNoTracking().Where(e => e.Username == username).SingleOrDefault();
+        }
+
         public void Add(User user)
         {
             _context.Users.Add(user);
