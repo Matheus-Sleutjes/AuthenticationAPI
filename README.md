@@ -14,7 +14,7 @@ Acesse o projeto, e execute: `docker compose up --build -d`
 
 Acesse a URL para a documentação: `http://localhost:8080/swagger/index.html` ou [clique aqui](http://localhost:8080/swagger/index.html) para ser redirecionado para o swagger
 
-<img src="AuthenticationAPI/swagger.png" alt="swagger">
+<img src="Authentication.API/swagger.png" alt="swagger">
 
 Pronto! Agora é só se divertir!
 
