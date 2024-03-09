@@ -30,6 +30,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapGet("/", () =>
+{
+    return Results.Ok("Works");
+});
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
