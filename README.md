@@ -20,6 +20,6 @@ Pronto! Agora é só se divertir!
 
 ## Considerações
 
-Caso queira rodar em modo Debug voce pode executar `docker run --name bd-auth -e POSTGRES_PASSWORD=postgres -p 5000:5432 -d postgres` para subir uma instância de BD, ou criar um banco em Postgres baseado na string de conexão `Host=localhost;Database=bd-auth;Port=5000;Username=postgres;Password=postgres;CommandTimeout=120;`
+Caso queira rodar em modo Debug voce pode executar `docker run --name db-auth -e POSTGRES_PASSWORD=postgres -p 5000:5432 -d postgres` para subir uma instância de BD, ou criar um banco em Postgres baseado na string de conexão `Host=localhost;Database=db-auth;Port=5000;Username=postgres;Password=postgres;CommandTimeout=120;`
 
 Feito com carinho por Matheus Sleutjes

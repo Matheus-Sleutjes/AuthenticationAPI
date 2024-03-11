@@ -25,10 +25,10 @@ namespace Authentication.API.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Post([FromBody]UserDto request)
+        public IActionResult Post([FromBody] UserDto request)
         {
-            _authenticationService.Add(request);
-            return Ok();
+            var id = _authenticationService.Add(request);
+            return Ok(new {Id = id});
         }
 
         [HttpPut("{id}")]
@@ -49,7 +49,7 @@ namespace Authentication.API.Controllers
 
         [HttpPost("Login")]
         [AllowAnonymous]
-        public IActionResult Login([FromBody]UserDto request)
+        public IActionResult Login([FromBody]LoginDto request)
         {
             var token = _authenticationService.Login(request);
             return Ok(token);

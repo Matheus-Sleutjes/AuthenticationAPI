@@ -27,22 +27,29 @@ namespace Authentication.Application.Service
             return new UserDto(entity);
         }
 
-        public void Add(UserDto user)
+        public Guid Add(UserDto user)
         {
+            var userExist = _authenticationRepository.Find(user.Username);
+            if (userExist != null) throw new Exception($"{user.Username} ja existe!");
+
+            Guid id;
             using (var hmac = new HMACSHA512())
             {
                 var passwordSalt = hmac.Key;
                 var passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(user.Password));
                 var entity = new User(user.Username, user.Email, passwordHash, passwordSalt);
+                id = entity.Id;
+
+                entity.Validation();
                 _authenticationRepository.Add(entity);
             }
             _authenticationRepository.SaveChanges();
+            return id;
         }
 
         public UserDto Update(UserDto user, Guid id)
         {
             var entity = _authenticationRepository.Find(id);
-
             if (entity == null) throw new Exception("Não existe entidade com esse id");
 
             using (var hmac = new HMACSHA512())
@@ -52,6 +59,8 @@ namespace Authentication.Application.Service
             }
             entity.Username = user.Username;
             entity.Email = user.Email;
+
+            entity.Validation();
 
             _authenticationRepository.Update(entity);
             _authenticationRepository.SaveChanges();
@@ -68,7 +77,7 @@ namespace Authentication.Application.Service
             _authenticationRepository.SaveChanges();
         }
 
-        public string Login(UserDto request)
+        public string Login(LoginDto request)
         {
             var user = _authenticationRepository.Find(request.Username);
             if (user == null) throw new Exception("Usuario não Existe!");
